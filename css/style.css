@@ -41,8 +41,10 @@ body {
     gap: 8px;
 }
 
-#game-result {
-    font-size: 1.5rem;
+.result-box {
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding: 1rem;
 }
 
 .board-square {
@@ -56,8 +58,10 @@ body {
     cursor: pointer;
 }
 
-.board-square:hover {
-   background-color: var(--board-square-hover);
+/* Disable pointer events on images within board square
+to register clicks only on the parent div */
+.board-square > img {
+    pointer-events: none;
 }
 
 .btn {
@@ -70,6 +74,12 @@ body {
     background-color: black;
 }
 
-.btn:hover {
-    filter: brightness(90%);
+/* Add hover effect to board squares and restart button only on dekstop/laptops */
+@media (hover: hover) {
+    .board-square:hover {
+        background-color: var(--board-square-hover);
+    }
+    .btn:hover {
+        filter: brightness(90%);
+    }
 }
