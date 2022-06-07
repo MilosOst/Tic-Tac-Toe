@@ -26,13 +26,17 @@ const gameBoard = (() => {
         return board[index];
     };
 
+    const isTie = () => {
+        return board.every(square => square !== '');
+    }
+
     const resetBoard = () => {
         for (let i = 0; i < board.length; i++) {
             board[i] = '';
         }
     };
 
-    return { setSquareValue, getSquareValue, resetBoard };
+    return { setSquareValue, getSquareValue, isTie, resetBoard };
 })();
 
 
@@ -62,12 +66,18 @@ const visualsController = (() => {
         squares[index].appendChild(squareImg);
     };
 
-    const displayResult = (winner, isOver) => {
+    const displayResult = (winner, result) => {
         const resultBox = document.querySelector('.result-box');
 
-        if (isOver) resultBox.textContent = `Player ${winner.getSymbol()} Won`;
-        else resultBox.textContent = `Player ${winner.getSymbol()}'s Turn`;
-
+        if (result === 'W') {
+            resultBox.textContent = `Player ${winner.getSymbol()} Won`;
+        }
+        else if (result === 'T') {
+            resultBox.textContent = "It's a Tie!";
+        }
+        else {
+            resultBox.textContent = `Player ${winner.getSymbol()}'s Turn`;
+        }
     };
 
     const resetVisuals = () => {
@@ -96,8 +106,12 @@ const gameController = (() => {
         visualsController.updateSquare(squareIndex);
         visualsController.displayResult(currentPlayerMove, isOver);
 
-        checkWinner();
-        visualsController.displayResult(currentPlayerMove, isOver);
+         if (checkWinner()) {
+             visualsController.displayResult(currentPlayerMove, 'W');
+         }
+         else if (gameBoard.isTie()) {
+             visualsController.displayResult(currentPlayerMove, 'T');
+         }
         currentPlayerMove = (currentPlayerMove === playerOne) ? playerTwo : playerOne;
     };
 
@@ -118,6 +132,10 @@ const gameController = (() => {
                 return true;
             }}
     };
+
+    const checkTie = () => {
+
+    }
 
     const isGameOver = () => {
         return isOver;

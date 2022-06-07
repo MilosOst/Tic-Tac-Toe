@@ -1,4 +1,4 @@
 # Tic-Tac-Toe
 
-## Future Improvments
+## Future Improvements
     - Add a playable AI opponent
