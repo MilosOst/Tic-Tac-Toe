@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    --light-blue: #e2effb;
+    --board-square-border: 1px solid #5782af;
+    --white: #fdfdfd;
+    --board-square-hover: #b9dfff;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    background-color: var(--light-blue);
+}
+
+.header {
+    padding: 2rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.content {
+    text-align: center;
+}
+
+.board {
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 1rem auto;
+    gap: 8px;
+}
+
+#game-result {
+    font-size: 1.5rem;
+}
+
+.board-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--board-square-border);
+    border-radius: 8px;
+    background-color: var(--white);
+    transition: 0.07s;
+    cursor: pointer;
+}
+
+.board-square:hover {
+   background-color: var(--board-square-hover);
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--white);
+    background-color: black;
+}
+
+.btn:hover {
+    filter: brightness(90%);
+}
