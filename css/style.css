@@ -45,6 +45,7 @@ body {
     font-size: 1.3rem;
     font-weight: 800;
     padding: 1rem;
+    height: 60px;
 }
 
 .board-square {
@@ -72,6 +73,30 @@ to register clicks only on the parent div */
     cursor: pointer;
     color: var(--white);
     background-color: black;
+}
+
+#difficulty-dropbox {
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 4px 12px;
+    background-color: var(--white);
+}
+
+
+@keyframes append-animate {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
+}
+
+/* animate new box */
+.board-square > img {
+	animation: append-animate .1s linear;
 }
 
 /* Add hover effect to board squares and restart button only on dekstop/laptops */

@@ -1,4 +1,5 @@
 # Tic-Tac-Toe
 
 ## Future Improvements
-    - Add a playable AI opponent
+    - Add unbeatable AI
+    - Let user pick between playing as 'X' and 'O'
