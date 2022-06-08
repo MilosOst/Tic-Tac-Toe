@@ -108,3 +108,11 @@ to register clicks only on the parent div */
         filter: brightness(90%);
     }
 }
+
+@media (max-width: 420px) {
+    :root {font-size: 12px;}
+    .board {
+        width: 350px;
+        height: 350px;
+    }
+}

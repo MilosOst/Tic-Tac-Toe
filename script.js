@@ -45,25 +45,25 @@ class AiPlayer extends Player {
         let pick;
         switch (this.#difficulty) {
             case 'easy':
-                pick = this.playRandomMove();
+                pick = this.#playRandomMove();
                 break;
             case 'medium':
-                pick = this.findWinningMove();
+                pick = this.#findWinningMove();
                 break;
             case 'hard':
             // If first move for AI, play corner/center depending on user move
             if (moveNum === 2) {
-                pick = this.handleFirstMove();
+                pick = this.#handleFirstMove();
                 break;
             }
-                pick = this.findWinningMove();
+                pick = this.#findWinningMove();
                 break;   
         }
         gameBoard.setSquareValue(pick, this.getSymbol());
         visualsController.updateSquare(pick);
     }
 
-    playRandomMove() {
+    #playRandomMove() {
         let legalMoves = [];
         for (let i = 0; i < 9; i++) {
             const squareValue = gameBoard.getSquareValue(i);
@@ -74,7 +74,7 @@ class AiPlayer extends Player {
 
     }
 
-    blockWinningMoves() {
+    #blockWinningMoves() {
         for (let position of winningPositions) {
             const userSquares = position.filter(index => gameBoard.getSquareValue(index) === 'X');
             const openSquares = position.filter(index => gameBoard.getSquareValue(index) === '');
@@ -85,11 +85,11 @@ class AiPlayer extends Player {
         }
 
         // If no direct blocks available, pick random move
-        return this.playRandomMove();
+        return this.#playRandomMove();
     }
 
 
-    findWinningMove() {
+    #findWinningMove() {
         for (let position of winningPositions) {
             const aiSquares = position.filter(index => gameBoard.getSquareValue(index) === this.getSymbol());
             const openSquares = position.filter(index => gameBoard.getSquareValue(index) === '');
@@ -98,10 +98,10 @@ class AiPlayer extends Player {
             if (aiSquares.length == 2 && openSquares.length === 1) return openSquares[0];
         }
         // If no direct winning move found, block direct winning moves
-        return this.blockWinningMoves();
+        return this.#blockWinningMoves();
     }
 
-    handleFirstMove() {
+    #handleFirstMove() {
         // Play corner move if user went to center
         if (gameBoard.getSquareValue(4) === 'X') {
             const corners = [0, 2, 6, 8];
@@ -113,7 +113,6 @@ class AiPlayer extends Player {
             return 4;
         }
     }
-
 }
 
 
@@ -260,7 +259,7 @@ const gameController = (() => {
         isOver = false;
     };
 
-    return { setGameDifficulty, playRound, isGameOver, resetGame, };
+    return { setGameDifficulty, playRound, checkWinner, isGameOver, resetGame, };
 
 })();
 
